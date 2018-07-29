@@ -1,2 +1,0 @@
-This is a test.txt file.
-By the way, we can get that delete from the stage do the same thing in iexplorer while the opposite do not.
