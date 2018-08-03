@@ -87,3 +87,62 @@ python中函数块内再定义函数是python的**[闭包](https://blog.csdn.net
 三、filter map reduce三个函数都接收一个函数和一个序列，区别在于map()依次将序列（list）的元素作为所接收函数的参数进行处理，然后返回一个list；reduce（）以（（a1，a2），a3）这样的顺序进行对序列的累积操作；filter（）把传入的函数依次作用于每个元素，然后根据返回值是True还是False决定保留（True时）还是丢弃该元素。
 
 四、高阶函数：一个函数接收另一个函数作为参数，这种函数就称之为高阶函数，在高阶函数的定义时，形参列表中函数名的形参在最后。
+
+## 定制类
+
+*`__slots__`这种形如`__xxx__`的变量或者函数名就要注意，这些在 Python 中是有特殊用途的*
+* 1 `__Str__`
+
+> 打印类的实例时,直接打印只会显示实例的内存地址, 在类的内部定义好__str__函数后打印类的实例时便会自动调用该函数
+
+
+* 2 `__repr__`
+
+> 注意repr和str函数的区别,str用于print实例,而repr用于直接显示.(如`>>>object_name`),__str__()返回用户看到的字符串，而__repr__()返回程序开发者看到的字符串.
+
+
+* 3 `__iter__`
+
+> 结合next()在类的内部形成迭代器结构, next()返回迭代器的下一个元素,__iter__返回迭代器对象本身.
+
+迭代器构造参考:
+
+> [1](https://blog.csdn.net/will130/article/details/50920501),[2](https://blog.csdn.net/chengqiaoyahaixuyush/article/details/37762015),[3](https://blog.csdn.net/baidu_36831253/article/details/77883941)
+
+
+* 4 `__slots__`
+
+用法见上文,作用为限制属性绑定.
+
+- 5 `__call__`
+
+在类中定义一个`__call__()`方法,就可以实现直接对实例进行调用,这一点上和`__repr__`很类似,但其还可以定义参数,使得对实例直接调用就好比对一个函数进行调用一样.
+
+>tips:判断一个对象能否被调用,能被调用的对象就是一个callable对象,可以用callable()函数来判断,用法如`callable(student())`和
+`callable([1, 2, 3])`等
+
++ 6 `__getattr__`
+
+正常情况下,当我们调用类的方法或属性时,若其不存在则会报错.解决方法为补充一个属性或不调用不存在的属性(*getattr解决属性问题*),另一个方法就是定义一个`__getattr__()`方法,动态返回一个属性.基本用法如下:
+
+	def __getattr__(self, attr):
+		if attr=='age':
+			return lambda: 25
+	
+	def __getattr__(self, attr):
+		if attr=='score':
+			return 99
+
+注意调用方式要从`print object.character`变为`object.character()`,原因在于lambda(python的关键字)的[特性](https://blog.csdn.net/zjuxsl/article/details/79437563)
+此外,定义getattr后任意调用任何(未定义)属性都会返回none,因为getattr()默认返回none.**若要让class只响应特定的几个属性**,就要按照约定,抛出[`AttributeError`](https://www.cnblogs.com/Lival/p/6203111.html)(涉及python异常处理方面)的错误:
+
+	def __getattr__(self, attr):
+		if attr=='age':
+			return lambda: 25
+		raise AttributeError('\'Student\' object has no attribute \'%s\'' % attr)
+
++ 7 `__getitem__`
+
+暂时省略,待理解,python中还用很多定制的方式...
+
+##	

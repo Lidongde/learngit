@@ -11,6 +11,10 @@
 
 6.[编辑器推荐](https://segmentfault.com/q/1010000003750586) 目前我自己使用的是markdownpad加web版的madoko
 
-## 
+---
+ 
 # hexo帮助
 1.[主题美化参考](https://www.jianshu.com/p/a47b7a1fb14c)
+
+---
+# [IT技术随笔](https://www.cnblogs.com/wushuaishuai/p/8508659.html)
