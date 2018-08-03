@@ -145,4 +145,42 @@ python中函数块内再定义函数是python的**[闭包](https://blog.csdn.net
 
 暂时省略,待理解,python中还用很多定制的方式...
 
-##	
+##	错误,调试和测试
+
+---
+
+* 有的错误是程序编写有问题造成的，比如本来应该输出整数结果输出了字符串，这种错误我们通常称之为 bug ， **bug 是必须修复的.**
+* 有的错误是用户输入造成的，比如让用户输入 email 地址，结果得到一个空字符串，这种错误可以通过检查用户输入来做相应的处理。
+* 还有一类错误是完全无法在程序运行过程中预测的，比如写入文件的时候，磁盘满了，写不进去了，或者从网络抓取数据，网络突然断掉了。这类错误也称为**异常**，在程序中通常是必须处理的，否则，程序会因为各种问题终止并退出。
+
+### 1. try机制
+
+	try:
+		print 'try...'
+		r = 10 / 0
+		print 'result:', r
+	except ZeroDivisionError, e:
+		print 'except:', e
+	finally:
+	print 'finally...'
+	print 'END'
+
+finally不是必须的,若有则一定会被执行(最后执行);except代码块可以有多个,使用不同的错误标志便可以捕获更多错误;上述代码中**ZeroDivisionError**是python内置的一个[错误指示标志](https://www.runoob.com/python/python-exceptions.html)(错误类型);`except zeroDivisionError, e:`这一部分代码有待理解, 现在记住这种用法即可;此外，如果没有错误发生，可以在*except语句块后面*加一个else，当没有错误发生时，会自动执行else语句(前面except语句捕获错误便不会执行他);注意,python的错误(标志)实质是class,存在继承关系,所以可能存在前面except屏蔽后面except代码块的情况.
+
+#### try...except 有一个优点, 即可以跨越多层调用,就是说不需要在每个可能出错的地方去捕获错误，只要在合适的层次去捕获错误就可以了.
+
+### 2. 不做错误处理,让python进行错误堆栈的调用,需要理解python的*错误报告*
+
+> 错误信息由上至下解读
+
+### 3. 使用[logging模块](https://www.cnblogs.com/CJOKER/p/8295272.html)记录错误
+
+3和2的区别在于2会使程序被终止,而3的方式下,既能捕获错误又可以打印出错误堆栈,并让程序继续执行.
+
+logging [模块详解](https://www.cnblogs.com/yyds/p/6901864.html):
+> 组件:
+>> 1. Logger(日志器): 提供了应用程序可一直使用的接口
+>> 2. Handler(处理器): 将logger创建的日志记录发送到合适的目的输出
+>> 3. Filter: 提供了更细粒度的控制工具来决定输出哪条日志记录,丢弃哪条日志记录
+>> 4. Formatter: 决定日志记录的最终输出格式
+
