@@ -184,3 +184,55 @@ logging [模块详解](https://www.cnblogs.com/yyds/p/6901864.html):
 >> 3. Filter: 提供了更细粒度的控制工具来决定输出哪条日志记录,丢弃哪条日志记录
 >> 4. Formatter: 决定日志记录的最终输出格式
 
+> *模块级别*的函数
+>> * logging.debug(msg, *args, **kwargs)
+>> * logging.info(msg, *args, **kwargs)
+>> * logging.warning(msg, *args, **kwargs)
+>> * logging.error(msg, *args, **kwargs) 
+>> * logging.critical(msg, *args, **kwargs)
+
+>> `logging.log(msg, *args, **kwargs)`
+
+>> * logging.basicConfig(**kwargs)
+
+>> **!** logging.basicconfig()函数很重要,可以接收filename, filemode, **format** , datefmt, level, stream, style, handlers等**关键字参数**
+>>> format格式**字符串字段**(代码中写入某个字段就会*产生*某个特定信息,可写的字段及产生的效果是固定的):
+
+>>> %(asctime)s: 日志事件发生的时间--人类可读时间，如：2003-07-08 16:49:45,896
+
+>>> %(created)f: 日志事件发生的时间--时间戳，就是当时调用time.time()函数返回的值
+
+>>> %(relativeCreated)d: 日志事件发生的时间相对于logging模块加载时间的相对毫秒数（目前还不知道干嘛用的）
+
+>>> %(msecs)d: 	日志事件发生事件的毫秒部分
+
+>>> %(levelname)s: 	该日志记录的文字形式的日志级别（'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'）
+
+>>> %(levelno)s: 该日志记录的数字形式的日志级别（10, 20, 30, 40, 50）
+
+>>> %(name)s: 所使用的日志器名称，默认是'root'，因为默认使用的是 rootLogger
+
+>>> %(message)s: 日志记录的文本内容，通过 msg % args计算得到的
+
+>>> %(pathname)s: 调用日志记录函数的源码文件的全路径
+
+>>> %(filename)s: 	pathname的文件名部分，包含文件后缀
+
+>>> %(module)s: filename的名称部分，不包含后缀
+
+>>> %(lineno)d: 调用日志记录函数的源代码所在的行号
+
+>>> %(funcName)s: 调用日志记录函数的函数名
+
+>>> %(process)d: 进程ID
+
+>>> %(processName)s: 进程名称，Python 3.1新增
+
+>>> %(thread)d: 线程ID
+
+>>> %(thread)s: 线程名称
+
+>> datefmt格式**字符串字段**:
+>> %m, %d, %Y, %H, %M, %S分别表示月,日,年,时,分,秒;具体的信息见[这里](http://www.runoob.com/python/python-date-time.html) 
+
+

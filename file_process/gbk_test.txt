@@ -1,0 +1,14 @@
+这是一个采用中文GBK编码方式编码的文件,仅用于测试文件读写小实验过程中的"字符编码"流程.
+
+使用with语句操作文件IO是一个好习惯哦!
+ Hello, world
+ Hello, world
+ test difference between a and a+
+ Hello, world
+ test difference between a and a+募?仅用于测试文件读写小实验过程中的"字符编码"流程.
+
+使用with语句操作文件IO是一个好习惯哦!
+ Hello, world
+ Hello, world
+ test difference between a and a+
+ Hello, world
